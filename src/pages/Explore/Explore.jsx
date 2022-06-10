@@ -1,24 +1,56 @@
 import { Card } from "../../components";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../actions";
+import {
+  filteredVideosByCategory,
+  resetFilter,
+} from "../../features/videoSlice";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 function Explore() {
+  const { allVideos, categories, filter, filteredVideos } = useSelector(
+    (store) => store.video
+  );
+  const dispatch = useDispatch();
+  const showVideos = filteredVideos.length > 0 ? filteredVideos : allVideos;
+  useEffect(() => {
+    dispatch(getCategories());
+    // eslint-disable-next-line
+  }, []);
+  useDocumentTitle("Explore | Clutch VODS");
   return (
     <div className="flex-1 ml-20 md:ml-0 p-1">
       <div className="p-2 flex flex-wrap lg:flex-nowrap gap-2 text-sm md:text-md lg:text-base md:gap-3 lg:gap-5">
         <button
-          className={` px-4 md:px-6 py-2 rounded-full bg-inherit  border border-color-gray-white dark:border-color-black`}>
+          onClick={() => dispatch(resetFilter())}
+          className={`${
+            !filter ? `bg-green-500 dark:bg-green-500` : `dark:bg-gray-700`
+          } px-4 md:px-6 py-2 rounded-full bg-inherit  border border-color-gray-white dark:border-color-black`}>
           All
         </button>
-        {[...Array(4)].map((_, index) => (
+        {categories.map((category) => (
           <button
-            key={index}
-            className={`px-4 md:px-6 py-2 rounded-full bg-inherit border border-color-gray-white dark:border-color-black`}>
-            {`Category ${index}`}
+            key={category._id}
+            onClick={() =>
+              dispatch(filteredVideosByCategory(category.categoryName))
+            }
+            className={`${
+              category.categoryName === filter
+                ? `bg-green-500 dark:bg-green-500`
+                : `dark:bg-gray-700`
+            } px-4 md:px-6 py-2 rounded-full bg-inherit border border-color-gray-white dark:border-color-black`}>
+            {category.categoryName}
           </button>
         ))}
-        <button className=" py-1 px-3 bg-rose-500 rounded-md">Reset</button>
+        <button
+          onClick={() => dispatch(resetFilter())}
+          className=" py-1 px-3 bg-rose-500 rounded-md">
+          Reset
+        </button>
       </div>
       <div className="box-shadow--theme grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-        {[...Array(20)].map((_, index) => (
-          <Card key={index} />
+        {showVideos.map((video) => (
+          <Card key={video._id} video={video} />
         ))}
       </div>
     </div>

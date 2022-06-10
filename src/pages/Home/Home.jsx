@@ -1,6 +1,16 @@
+import { getCategories } from "../../actions";
 import { CategoryCard } from "../../components";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 const Home = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((store) => store.video);
+  useEffect(() => {
+    dispatch(getCategories());
+    // eslint-disable-next-line
+  }, []);
+  useDocumentTitle("Home | Clutch VODS");
   return (
     <div className="flex-1 flex flex-col ml-20 md:ml-0 p-1 pb-4">
       <div className="relative hero border border-white w-full box-shadow--theme p-1">
@@ -24,8 +34,8 @@ const Home = () => {
         Categories
       </h2>
       <div className="box-shadow--theme grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 h-full">
-        {[...Array(4)].map((category, index) => (
-          <CategoryCard key={index} category={category} />
+        {categories.map((category) => (
+          <CategoryCard key={category._id} category={category} />
         ))}
       </div>
     </div>

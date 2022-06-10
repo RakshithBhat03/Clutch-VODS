@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { loginUser } from "../../actions";
 import { FormError } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 function Login() {
   const [passwordVisibilty, setPasswordVisibility] = useState(false);
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ function Login() {
     }
     // eslint-disable-next-line
   }, [status]);
+  useDocumentTitle("Login | Clutch VODS");
 
   return (
     <div className="flex flex-col gap-5 justify-center items-center flex-1 ml-20 md:ml-0 ">

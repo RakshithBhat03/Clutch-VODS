@@ -4,12 +4,14 @@ import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadTheme } from "./features/themeSlice";
+import { getAllVideos } from "./actions";
 
 function App() {
   const theme = useSelector((store) => store.theme);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadTheme());
+    dispatch(getAllVideos());
     // eslint-disable-next-line
   }, []);
   return (

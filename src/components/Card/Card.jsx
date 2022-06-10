@@ -1,4 +1,12 @@
 import { MdDelete } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  deleteHistory,
+  deleteLiked,
+  deleteVideoFromPlaylist,
+  deleteWatchLater,
+} from "../../actions";
 function Card({
   video,
   deleteBtn = false,
@@ -7,26 +15,27 @@ function Card({
   watchLater = false,
   playlistVideo = false,
 }) {
+  const { id } = useParams();
+  const { _id, title, thumbnail, creator, channelImage } = video;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
-    <div className="box-shadow--theme p-2 hover:cursor-pointer hover:shadow-slate-400 relative">
+    <div
+      onClick={() => navigate(`/watch/${_id}`)}
+      className="box-shadow--theme p-2 hover:cursor-pointer hover:shadow-slate-400 relative">
       <figure className="mb-3">
-        <img
-          src="https://res.cloudinary.com/clutchaf/image/upload/v1654842247/Video%20Library/undraw_video_files_fu10_xprk5t.svg"
-          alt="thumbnail"
-          className="w-32 h32"
-        />
+        <img src={thumbnail} alt="thumbnail" className="w-full" />
       </figure>
       <div className="w-full mt-2 flex gap-2 px-2">
+        {/* <div className="rounded-full w-18 h-12 border overflow-hidden"> */}
         <figure className="w-12 border h-full rounded-full flex-initial shrink-0 overflow-hidden">
-          <img
-            src="https://res.cloudinary.com/clutchaf/image/upload/v1654842247/Video%20Library/undraw_video_files_fu10_xprk5t.svg"
-            alt="channel-logo"
-          />
+          <img src={channelImage} alt="channel-logo" />
         </figure>
+        {/* </div> */}
         <div className="flex flex-col mb-2">
-          <h2 className="text-sm sm:text-md md:text-base">Video Title</h2>
+          <h2 className="text-sm sm:text-md md:text-base">{title}</h2>
           <h3 className="text-md font-semibold text-green-600">
-            Channel Name
+            {creator}
             <i className="ml-2 fa-solid fa-circle-check"></i>
           </h3>
         </div>
@@ -35,6 +44,13 @@ function Card({
         <button
           onClick={(e) => {
             e.stopPropagation();
+            liked && dispatch(deleteLiked(_id));
+            history && dispatch(deleteHistory(_id));
+            watchLater && dispatch(deleteWatchLater(_id));
+            playlistVideo &&
+              dispatch(
+                deleteVideoFromPlaylist({ videoId: _id, playlistId: id })
+              );
           }}
           className="absolute top-5 right-5 text-2xl text-rose-500 p-2 rounded-full bg-black/20 dark:bg-white/50">
           <MdDelete />
