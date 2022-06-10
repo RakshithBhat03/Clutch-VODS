@@ -8,20 +8,30 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "Computer Programming",
-    description:
-      "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing",
+    categoryName: "Mini Movies",
+    description: "Mini movies from the NBA finals",
+    thumbnail:
+      "https://res.cloudinary.com/clutchaf/image/upload/v1654691349/Video%20Library/Mini%20Movies/youthumb_iDCegwpnlbM_high_e1jwru.webp",
   },
   {
     _id: uuid(),
-    categoryName: "Frontend Development",
-    description:
-      "Front-end web development, also known as client-side development is the practice of producing HTML, CSS and JavaScript for a website or Web Application",
+    categoryName: "Highlights",
+    description: "All the flashy plays and dunks from the NBA",
+    thumbnail:
+      "https://res.cloudinary.com/clutchaf/image/upload/v1654692288/Video%20Library/Highlights/youthumb_7fPcse1phtk_high_cjhfmj.webp",
   },
   {
     _id: uuid(),
-    categoryName: "Backend Development",
-    description:
-      "Backend Development is also known as server-side development. It is everything that the users don't see and contains behind-the-scenes activities that occur when performing any action on a website.",
+    categoryName: "Top Plays",
+    description: "The top plays from the NBA",
+    thumbnail:
+      "https://res.cloudinary.com/clutchaf/image/upload/v1654692288/Video%20Library/Highlights/youthumb_cuLprHh_BRg_high_bzn0lg.webp",
+  },
+  {
+    _id: uuid(),
+    categoryName: "Fails",
+    description: "Funny fails and moments from the NBA",
+    thumbnail:
+      "https://res.cloudinary.com/clutchaf/image/upload/v1654693786/Video%20Library/Fails/youthumb_UKFCwrFe88Y_high_lt7qjl.webp",
   },
 ];
