@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { SignupUser } from "../../actions";
 import { FormError } from "../../components";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+
 function Signup() {
   const { error, status } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ function Signup() {
       dispatch(SignupUser(signupValues));
     },
   });
+  useDocumentTitle("Signup | Clutch VODS");
   return (
     <div className="flex flex-col gap-5 justify-center items-center flex-1 ml-20 md:ml-0 ">
       <div className="border border-sm dark:border-gray-500 p-2 w-72 h-[34rem] sm:w-[24rem] sm:h-[40rem] md:w-[30rem] md:h-[46rem] rounded-sm flex flex-col gap-2 sm:gap-3 md:gap-4 justify-center items-center box-shadow--theme">
