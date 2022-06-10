@@ -1,0 +1,11 @@
+import { configureStore } from "@reduxjs/toolkit";
+import mobileMenuReducer from "../features/mobileMenu";
+import themeReducer from "../features/themeSlice";
+import authReducer from "../features/authSlice";
+export const store = configureStore({
+  reducer: {
+    theme: themeReducer,
+    mobileMenu: mobileMenuReducer,
+    auth: authReducer,
+  },
+});

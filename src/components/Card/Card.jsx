@@ -17,14 +17,12 @@ function Card({
         />
       </figure>
       <div className="w-full mt-2 flex gap-2 px-2">
-        {/* <div className="rounded-full w-18 h-12 border overflow-hidden"> */}
         <figure className="w-12 border h-full rounded-full flex-initial shrink-0 overflow-hidden">
           <img
             src="https://res.cloudinary.com/clutchaf/image/upload/v1654842247/Video%20Library/undraw_video_files_fu10_xprk5t.svg"
             alt="channel-logo"
           />
         </figure>
-        {/* </div> */}
         <div className="flex flex-col mb-2">
           <h2 className="text-sm sm:text-md md:text-base">Video Title</h2>
           <h3 className="text-md font-semibold text-green-600">
