@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
+import { store } from "./app/store";
+import { Provider } from "react-redux";
 
 // Call make Server
 makeServer();
@@ -11,6 +13,8 @@ makeServer();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </Router>
 );
