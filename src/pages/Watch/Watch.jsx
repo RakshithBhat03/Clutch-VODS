@@ -4,7 +4,6 @@ import { getVideoById } from "../../actions";
 import { useEffect } from "react";
 import { RelatedVideos, VideoPlayer } from "../../components";
 import { clearCurrentVideo } from "../../features/videoSlice";
-import { Helmet } from "react-helmet";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 const Watch = () => {
   const { id: videoId } = useParams();
