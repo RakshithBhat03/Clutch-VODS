@@ -18,9 +18,6 @@ const Watch = () => {
   useDocumentTitle(`${currentVideo.title}`);
   return (
     <div className="box-shadow--theme flex flex-col lg:flex-row flex-1 gap-3 ml-20 md:ml-0 p-1">
-      <Helmet>
-        <title>{`${currentVideo.title}`}</title>
-      </Helmet>
       <VideoPlayer />
       <RelatedVideos currentVideo={currentVideo} />
     </div>
