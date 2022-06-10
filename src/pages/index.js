@@ -5,3 +5,5 @@ export { History } from "./History/History";
 export { WatchLater } from "./Watch Later/WatchLater";
 export { LikedVideos } from "./Liked Videos/LikedVideos";
 export { Login } from "./Login/Login";
+export { Watch } from "./Watch/Watch";
+export { Signup } from "./Signup/Signup";
