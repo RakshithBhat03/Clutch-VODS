@@ -4,7 +4,7 @@
 
 @layer components {
   .button--sidebar {
-    @apply text-left px-6 py-3 w-full mt-1 text-xl hover:bg-darkGrayishBlue flex gap-2 items-center;
+    @apply text-left px-6 py-3 w-full mt-1 text-xl hover:bg-brightRed hover:text-white flex gap-2 items-center;
   }
   .box-shadow--theme {
     @apply dark:shadow-gray-800 shadow-md;
