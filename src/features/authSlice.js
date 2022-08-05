@@ -6,7 +6,7 @@ const initialState = {
   userToken: getLocalStorage("userToken"),
   userData: getLocalStorage("userDate") ?? [],
   status: false,
-  loading: true,
+  loading: false,
   error: false,
 };
 const authSlice = createSlice({
