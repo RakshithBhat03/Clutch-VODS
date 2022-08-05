@@ -132,6 +132,22 @@ export const deleteHistory = createAsyncThunk(
     } catch (error) {}
   }
 );
+export const clearHistory = createAsyncThunk(
+  "video/clearHistory",
+  async (_, thunkAPI) => {
+    const {
+      auth: { userToken },
+    } = thunkAPI.getState();
+    try {
+      const response = await axios.delete(`/api/user/history/all`, {
+        headers: {
+          authorization: userToken,
+        },
+      });
+      return response.data;
+    } catch (error) {}
+  }
+);
 export const getWatchLater = createAsyncThunk(
   "video/getWatchLater",
   async (_, thunkAPI) => {
@@ -233,11 +249,8 @@ export const deletePlaylist = createAsyncThunk(
           authorization: userToken,
         },
       });
-      console.log(response.data);
       return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
 );
 export const addVideoToPlaylist = createAsyncThunk(
