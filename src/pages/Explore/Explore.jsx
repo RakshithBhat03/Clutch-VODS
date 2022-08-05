@@ -20,11 +20,13 @@ function Explore() {
   useDocumentTitle("Explore | Clutch VODS");
   return (
     <div className="flex-1 ml-20 md:ml-0 p-1">
-      <div className="p-2 flex flex-wrap lg:flex-nowrap gap-2 text-sm md:text-md lg:text-base md:gap-3 lg:gap-5">
+      <div className="p-2 mb-2 flex flex-wrap lg:flex-nowrap gap-2 text-sm md:text-md lg:text-base md:gap-3 lg:gap-5">
         <button
           onClick={() => dispatch(resetFilter())}
           className={`${
-            !filter ? `bg-green-500 dark:bg-green-500` : `dark:bg-gray-700`
+            !filter
+              ? `bg-brightRed dark:bg-brightRed text-white`
+              : `dark:bg-gray-700`
           } px-4 md:px-6 py-2 rounded-full bg-inherit  border border-color-gray-white dark:border-color-black`}>
           All
         </button>
@@ -36,7 +38,7 @@ function Explore() {
             }
             className={`${
               category.categoryName === filter
-                ? `bg-green-500 dark:bg-green-500`
+                ? `bg-brightRed dark:bg-brightRed text-white`
                 : `dark:bg-gray-700`
             } px-4 md:px-6 py-2 rounded-full bg-inherit border border-color-gray-white dark:border-color-black`}>
             {category.categoryName}
@@ -44,7 +46,7 @@ function Explore() {
         ))}
         <button
           onClick={() => dispatch(resetFilter())}
-          className=" py-1 px-3 bg-rose-500 rounded-md">
+          className=" py-1 px-3 bg-rose-500 rounded-md text-white">
           Reset
         </button>
       </div>

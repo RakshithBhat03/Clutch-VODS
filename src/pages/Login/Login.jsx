@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { loginUser } from "../../actions";
-import { FormError } from "../../components";
+import { FormError, SpinLoader } from "../../components";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 function Login() {
   const [passwordVisibilty, setPasswordVisibility] = useState(false);
   const dispatch = useDispatch();
-  const { error, status } = useSelector((store) => store.auth);
+  const { error, status, loading } = useSelector((store) => store.auth);
   const location = useLocation();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -114,7 +114,7 @@ function Login() {
           <button
             type="submit"
             className="px-10 mt-5 text-base sm:text-xl py-3 w-full rounded-md text-white dark:text-inherit font-semibold bg-brightRed">
-            Login
+            {loading ? <SpinLoader /> : "Login"}
           </button>
           <button
             type="submit"

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,6 +8,7 @@ import {
   deleteVideoFromPlaylist,
   deleteWatchLater,
 } from "../../actions";
+import { GrowLoader } from "../Loaders";
 function Card({
   video,
   deleteBtn = false,
@@ -16,29 +18,45 @@ function Card({
   playlistVideo = false,
 }) {
   const { id } = useParams();
+  const [imageLoader, setImageLoader] = useState(true);
   const { _id, title, thumbnail, creator, channelImage } = video;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
     <div
       onClick={() => navigate(`/watch/${_id}`)}
-      className="box-shadow--theme p-2 hover:cursor-pointer hover:shadow-slate-400 relative">
-      <figure className="mb-3">
-        <img src={thumbnail} alt="thumbnail" className="w-full" />
+      className={`${
+        imageLoader && `h-56`
+      } box-shadow--theme border dark:border-slate-600 p-2 hover:cursor-pointer hover:shadow-slate-400 relative `}>
+      {imageLoader && <GrowLoader width="w-12" height="h-12" />}
+      <figure className={`${imageLoader ? `hidden` : `mb-3`}`}>
+        <img
+          src={thumbnail}
+          alt="thumbnail"
+          className="w-full"
+          onLoad={() => setImageLoader(false)}
+        />
       </figure>
       <div className="w-full mt-2 flex gap-2 px-2">
         {/* <div className="rounded-full w-18 h-12 border overflow-hidden"> */}
-        <figure className="w-12 border h-full rounded-full flex-initial shrink-0 overflow-hidden">
+        <figure
+          className={`${
+            imageLoader
+              ? `hidden`
+              : `w-12 border h-full rounded-full flex-initial shrink-0 overflow-hidden`
+          }`}>
           <img src={channelImage} alt="channel-logo" />
         </figure>
         {/* </div> */}
-        <div className="flex flex-col mb-2">
-          <h2 className="text-sm sm:text-md md:text-base">{title}</h2>
-          <h3 className="text-md font-semibold text-green-600">
-            {creator}
-            <i className="ml-2 fa-solid fa-circle-check"></i>
-          </h3>
-        </div>
+        {!imageLoader && (
+          <div className="flex flex-col mb-2">
+            <h2 className="text-sm sm:text-md md:text-base">{title}</h2>
+            <h3 className="text-md font-semibold text-green-600">
+              {creator}
+              <i className="ml-2 fa-solid fa-circle-check"></i>
+            </h3>
+          </div>
+        )}
       </div>
       {deleteBtn && (
         <button
