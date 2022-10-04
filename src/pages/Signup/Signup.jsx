@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { SignupUser } from "../../actions";
-import { FormError } from "../../components";
+import { FormError, SpinLoader } from "../../components";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 function Signup() {
-  const { error, status } = useSelector((store) => store.auth);
+  const { error, status, loading } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const [passwordVisibilty, setPasswordVisibility] = useState(false);
   const navigate = useNavigate();
@@ -53,6 +53,15 @@ function Signup() {
       dispatch(SignupUser(signupValues));
     },
   });
+  const fillDummyData = () => {
+    formik.setValues({
+      firstName: "John",
+      lastName: "Doe",
+      email: "johndoe@gmail.com",
+      password: "johndoe123",
+      confirmPassword: "johndoe123",
+    });
+  };
   useDocumentTitle("Signup | Clutch VODS");
   return (
     <div className="flex flex-col gap-5 justify-center items-center flex-1 ml-20 md:ml-0 ">
@@ -60,9 +69,14 @@ function Signup() {
         <form
           onSubmit={formik.handleSubmit}
           className="items-center flex flex-col justify-center text-left w-full px-2 sm:px-8">
-          <h1 className="text-2xl w-full sm:text-4xl text-left font-bold">
-            Signup
-          </h1>
+          <div className="flex w-full align-center justify-between">
+            <h1 className="text-2xl sm:text-4xl text-left font-bold">Signup</h1>
+            <span
+              onClick={fillDummyData}
+              className="text-base sm:text-xl text-blue-500 underline cursor-pointer underline-offset-4 hover:text-blue-300">
+              Fill dummy data
+            </span>
+          </div>
           <label className="w-full mt-3 sm:mt-4 md:mt-5">
             <input
               type="text"
@@ -181,7 +195,7 @@ function Signup() {
           <button
             type="submit"
             className="px-10 mt-5 text-base sm:text-xl py-2 md:py-3 w-full rounded-md text-white dark:text-inherit font-semibold bg-brightRed">
-            Create Account
+            {loading ? <SpinLoader /> : "Create Account"}
           </button>
         </form>
         <h2 className="text-base sm:text-xl font-semibold">

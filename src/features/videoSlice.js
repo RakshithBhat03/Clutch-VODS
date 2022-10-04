@@ -5,6 +5,7 @@ import {
   addToPlaylist,
   addVideoToPlaylist,
   addWatchLater,
+  clearHistory,
   deleteHistory,
   deleteLiked,
   deletePlaylist,
@@ -173,6 +174,23 @@ const videoSlice = createSlice({
       state.isLoading = false;
       state.error = true;
     },
+    [clearHistory.pending]: (state) => {
+      state.isLoading = true;
+      state.error = false;
+    },
+    [clearHistory.fulfilled]: (state, action) => {
+      state.history = action.payload.history;
+      state.isLoading = false;
+      state.error = false;
+      ShowToast({
+        type: "success",
+        message: `History Cleared!`,
+      });
+    },
+    [clearHistory.rejected]: (state) => {
+      state.isLoading = false;
+      state.error = true;
+    },
     [getWatchLater.pending]: (state) => {
       state.isLoading = true;
       state.error = false;
@@ -225,7 +243,7 @@ const videoSlice = createSlice({
       state.error = false;
     },
     [getAllPlaylists.fulfilled]: (state, action) => {
-      state.playlists = action.payload.playlists;
+      state.playlists = action?.payload?.playlists ?? [];
       state.isLoading = false;
       state.error = false;
     },
@@ -238,13 +256,20 @@ const videoSlice = createSlice({
       state.error = false;
     },
     [addToPlaylist.fulfilled]: (state, action) => {
-      state.playlists = action.payload.playlists;
-      state.isLoading = false;
-      state.error = false;
-      ShowToast({
-        type: "success",
-        message: `Playlist Created`,
-      });
+      if (!action?.payload?.playlists)
+        ShowToast({
+          type: "warning",
+          message: `Something went wrong`,
+        });
+      else {
+        state.playlists = action?.payload?.playlists ?? [];
+        state.isLoading = false;
+        state.error = false;
+        ShowToast({
+          type: "success",
+          message: `Playlist Created`,
+        });
+      }
     },
     [addToPlaylist.rejected]: (state) => {
       state.isLoading = false;

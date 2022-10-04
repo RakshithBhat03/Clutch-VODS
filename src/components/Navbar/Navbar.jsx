@@ -19,18 +19,23 @@ function Navbar() {
   return (
     <nav className="relative w-full mx-auto p-6 box-shadow--theme ">
       <div className="flex items-center justify-between">
-        <div className="items-center space-x-5">
+        <div className="flex items-center space-x-5">
           <button onClick={SideBarHandler} className="md:hidden">
             <i className="fa-solid fa-bars text-xl"></i>
           </button>
-          <Link to="/" className="text-xl">
-            Clutch VODS
+          <Link to="/" className="flex items-center">
+            <img
+              src="https://res.cloudinary.com/clutchaf/image/upload/v1659726264/Video%20Library/logo_rysrqp.png"
+              alt=""
+              className="w-8 h-8 sm:w-12 sm:h-12"
+            />
+            <span className="text-2xl ml-2">VODS</span>
           </Link>
         </div>
         <div className="flex items-center space-x-4">
           <button
             onClick={handleAuth}
-            className="pt-2 pb-3 px-6 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight cursor-pointer">
+            className="py-2 px-4 sm:px-6 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight cursor-pointer">
             {userToken ? `Logout` : `Login`}
           </button>
           <button onClick={themeHandler} className="px-3 py-2">

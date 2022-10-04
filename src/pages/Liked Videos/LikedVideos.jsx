@@ -13,8 +13,11 @@ function LikedVideos() {
   }, []);
   useDocumentTitle("Liked Videos | Clutch VODS");
   return likedVideos.length !== 0 ? (
-    <div className="flex-1 ml-20 md:ml-0 p-1">
-      <div className="box-shadow--theme grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+    <div className="flex-1 ml-20 md:ml-0 p-1 ">
+      <h2 className="sm:text-3xl text-2xl my-2 font-semibold text-center underline underline-offset-4 decoration-blue-400">
+        Liked Videos
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         {likedVideos.map((video) => (
           <Card key={video._id} video={video} deleteBtn liked />
         ))}

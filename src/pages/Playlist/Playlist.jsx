@@ -14,7 +14,10 @@ function Playlist() {
   useDocumentTitle("Playlist | Clutch VODS");
   return playlists.length !== 0 ? (
     <div className="flex-1 ml-20 md:ml-0 p-1">
-      <div className="box-shadow--theme grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+      <h2 className="sm:text-3xl text-2xl my-2 font-semibold text-center underline underline-offset-4 decoration-blue-400">
+        Your Playlists
+      </h2>
+      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         {playlists.map((playlist) => (
           <PlaylistCard playlist={playlist} key={playlist._id} />
         ))}
